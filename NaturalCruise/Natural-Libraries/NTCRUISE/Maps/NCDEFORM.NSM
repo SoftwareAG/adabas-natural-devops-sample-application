@@ -1,0 +1,96 @@
+* >Natural Source Header 000000
+* :Mode S
+* :CP
+* <Natural Source Header
+* MAP2: PROTOTYPE VERSION 820 --- CREATED BY ONE 8.3.6 ---
+* WRITE USING MAP 'XXXXXXXX'
+*     #CR-ED #CR-ET #CR-FROMH #CR-ID #CR-P1W #CR-P2W #CR-P3W #CR-SD #CR-ST
+*     #CR-STATUS #CR-TOH #CR-YACHT-NAME
+DEFINE DATA PARAMETER
+1 #CR-ED (A013)
+1 #CR-ET (A007)
+1 #CR-FROMH (A020)
+1 #CR-ID (N08.0)
+1 #CR-P1W (A020)
+1 #CR-P2W (A020)
+1 #CR-P3W (A020)
+1 #CR-SD (A013)
+1 #CR-ST (A007)
+1 #CR-STATUS (A020)
+1 #CR-TOH (A020)
+1 #CR-YACHT-NAME (A020)
+END-DEFINE
+FORMAT PS=024 LS=080 ZP=OFF SG=OFF KD=OFF IP=OFF
+* MAP2: MAP PROFILES *****************************        200***********
+* .TTAAAMMOO   D I D I N D I D I        ?_)^&:+(                       *
+* 024079        N0NNUCN            X         01 SYSPROF NR             *
+************************************************************************
+WRITE ( AD=D                                                          /*
+                                                                       )
+/
+ 002T *USER /*.02S008 A008 .
+      (AD=OD )
+ 024T 'Natural Class - Cruise Information Form'(U)
+ 071T *TIMX /*.01S008 T    .
+      (AD=OD )
+/
+ 001T '_' (079)
+/
+/
+ 018T #CR-ID /*.01U008 N08.0.
+      (AD=OIZ )
+ 040T #CR-YACHT-NAME /*.01U020 A020 .
+      (AD=OIZ )
+/
+ 018T 'Cruise-id'(C)
+ 040T 'Yacht-Name'(C)
+/
+ 018T #CR-FROMH /*.01U020 A020 .
+      (AD=OIZ )
+ 040T #CR-TOH /*.01U020 A020 .
+      (AD=OIZ )
+/
+ 018T 'from Harbor'(C)
+ 040T 'to Harbor'(C)
+/
+ 018T #CR-SD /*.01U013 A013 .
+      (AD=OIZ )
+ 031T #CR-ST /*.01U007 A007 .
+      (AD=OIZ )
+ 040T #CR-ED /*.01U013 A013 .
+      (AD=OIZ )
+ 053T #CR-ET /*.01U007 A007 .
+      (AD=OIZ )
+/
+ 018T 'starting'(C)
+ 040T 'ending'(C)
+/
+/
+ 018T #CR-STATUS /*.01U020 A020 .
+      (AD=OIZ )
+ 040T #CR-P1W /*.01U020 A020 .
+      (AD=OIZ )
+/
+ 018T 'Status'(C)
+ 040T 'price one week'(C)
+/
+ 040T #CR-P2W /*.01U020 A020 .
+      (AD=OIZ )
+/
+ 040T 'price two weeks'(C)
+/
+ 040T #CR-P3W /*.01U020 A020 .
+      (AD=OIZ )
+/
+ 040T 'price three weeks'(C)
+/
+/
+/
+ 001T '_' (079)
+/
+/
+/
+/
+* MAP2: VALIDATION *****************************************************
+* MAP2: END OF MAP *****************************************************
+END

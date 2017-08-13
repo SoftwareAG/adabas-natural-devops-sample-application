@@ -1,0 +1,51 @@
+* >Natural Source Header 000000
+* :Mode S
+* :CP
+* <Natural Source Header
+/** <h1>Program NCATENDP.</h1>
+/** <p>Natural Course - Example Program</p>
+/** <p>Contents:</p>
+/**     <ul type="square">
+/**         <li>AT END OF PAGE Statement</li>
+/**         <li>AT TOP OF PAGE Statement (repeated)</li>
+/**         <li>*LINE-COUNT</li>
+/**         <li>*PAGE-NUMBER</li>
+/**     </ul>
+/** :author Training
+/* TODO Enter your code here
+DEFINE DATA LOCAL
+  USING NCDEMAPL
+LOCAL
+1 #REC-COUNT (N5)
+1 #LINE-INFO (A100)
+END-DEFINE
+*
+FORMAT PS=15 LS=120
+/*
+AT TOP OF PAGE
+  COMPRESS '----- Page:' *PAGE-NUMBER
+    INTO #LINE-INFO
+  WRITE NOTITLE NOHDR #LINE-INFO
+END-TOPPAGE
+AT END OF PAGE
+  COMPRESS '----- Cruise Records displayed:'#REC-COUNT
+    INTO #LINE-INFO
+  WRITE NOTITLE NOHDR #LINE-INFO
+END-ENDPAGE
+*
+R1. READ (40) NCCRUISE
+  F1.  FIND NCYACHT YACHT-ID = NCCRUISE.ID-YACHT
+*
+    COMPUTE #REC-COUNT = #REC-COUNT + 1
+    WRITE NOHDR
+      NCYACHT.YACHT-NAME (AL=15)
+      NCCRUISE.START-DATE (EM=9999'-'99'-'99)
+      NCCRUISE.END-DATE (EM=9999'-'99'-'99)
+      NCCRUISE.START-HARBOR (AL=15)
+      NCCRUISE.DESTINATION-HARBOR (AL=15)
+      '-' *LINE-COUNT
+  END-FIND
+END-READ
+*
+END
+

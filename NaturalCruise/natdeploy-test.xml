@@ -1,0 +1,480 @@
+<!-- ANT_NATURAL_SCRIPT (do not remove) -->
+<project name="${natural.ant.project.name}" default="build" basedir=".">
+        
+  <target name="help"
+          description="shows a help screen">
+    <!-- display help screen -->
+    <echo message="ANT Natural deployment utility"/>
+    <echo message=" "/>
+    <echo message="  This utility performs deployment processing for NaturalONE."/>
+    <echo message=" "/>
+    <echo message="  The following targets are available:"/>
+    <echo message="    checkout               do initial repository checkout"/>
+    <echo message="                           of the specified project resources"/>
+    <echo message="    update                 do incremental repository"/>
+    <echo message="                           update of the project resources"/>
+    <echo message="    build                  initiate the build process"/>
+    <echo message=" "/> 
+    <echo message="    checkts                check for time stamp conflicts"/>
+    <echo message="                           (server must be capable of time stamp handling)"/>
+    <echo message=" "/> 
+    <echo message="  The following options are available:"/>
+    <echo message="    -Dnatural.ant.project.rootdir={dirname}"/>
+    <echo message="        specify root directory for project"/>
+    <echo message="    -Dnatural.ant.deploy.full=yes/no"/>
+    <echo message="        specify deploy mode (full=yes/incremental=no)"/>
+    <echo message="    -Dnatural.ant.deploy.scope=1/2/3"/>
+    <echo message="        specify scope of affected files"/>
+    <echo message="          1: process only changed files"/>
+    <echo message="          2: process changed files and their dependents"/>
+    <echo message="          3: process all files required for catalog"/>
+    <echo message="    -Dnatural.ant.failonerror=yes/no"/>
+    <echo message="        specify if the script should fail on errors (default:no)"/>
+    <echo message="    -Dnatural.ant.retain.header.info=yes/no"/>
+    <echo message="        retain timestamp and user info from source header (default:no)"/>
+    <echo message="    -Dnatural.ant.resolve.time.stamp.conflicts=yes/no"/>
+    <echo message="        (only applicable in conjunction with target 'checkts')"/>
+    <echo message="        resolves time stamp conflicts by updating the local time stamps"/>
+    <echo message="        with the current time stamps from the server (default:no)"/>
+    <echo message="    -logfile {filename}"/>
+    <echo message="        use given file for log"/>
+    <echo message=" "/>
+  </target>
+    
+  
+  <target name="-setProperties">
+    <!-- Property logic: DO NOT EDIT NOR REMOVE -->
+    <!-- ### ANT_DEPLOY_PROPERTIES_START ### -->
+    <property environment="env"/>
+    <property name="natural.ant.server.parameters" value="webio=on parm=NDVTEST" />
+    <property name="natural.ant.repository.password" value="" />
+    <property name="natural.ant.project.password.encryption" value="YES" />
+    <property name="natural.ant.deploy.exclude.list" value="YES" />
+    <property name="natural.ant.deploy.scope" value="3" />
+    <property name="natural.ant.repository.username" value="" />
+    <property name="natural.ant.deploy.timestamp.check" value="NO" />
+    <property name="natural.ant.deploy.retain.unchanged.sources" value="NO" />
+    <property name="natural.ant.deploy.full" value="NO" />
+    <property name="natural.ant.generate.old.data.area.format" value="NO" />
+    <property name="natural.ant.library.steplib.nsv" value="" />
+    <property name="natural.ant.source.all.types" value="YES" />
+    <property name="natural.ant.repository.url" value="" />
+    <property name="natural.ant.repository.version" value="" />
+    <property name="natural.ant.source.type.selection" value="2736127" />
+    <property name="natural.ant.repository.access.method" value=":pserver:" />
+    <property name="natural.ant.deploy.upload" value="YES" />
+    <property name="natural.ant.repository.type" value="SVN" />
+    <property name="natural.ant.server.port" value="2700" />
+    <property name="natural.ant.project.name" value="NaturalCruise" />
+    <property name="natural.ant.server.secured.environment" value="NO" />
+    <property name="natural.ant.project.rootdir" value="/var/lib/jenkins/workspace/NatCITest" />
+    <property name="natural.ant.deploy.stow" value="NO" />
+    <property name="natural.ant.mapping.enable" value="NO" />
+    <property name="natural.ant.project.deploy.file.name" value="natdeploy-test.xml" />
+    <property name="natural.ant.deploy.delete" value="NO" />
+    <property name="natural.ant.server.hostname" value="127.0.0.1" />
+    <property name="natural.ant.mapping.string" value="NTCRUISE=NTCRUISE;" />
+    <property name="natural.ant.failonerror" value="YES" />
+    <property name="natural.ant.project.steplibs" value="1;SYSEXDDM;" />
+    <property name="natural.ant.deploy.catalog.retries" value="1" />
+    <property name="natural.ant.repository.module" value="" />
+    <property name="natural.ant.deploy.catalog" value="YES" />
+    <property name="natural.ant.library.steplibs" value="" />
+    <property name="natural.ant.server.environment" value="127.0.0.1-2700" />
+    <property name="natural.ant.server.password" value="" />
+    <property name="natural.ant.server.username" value="CI-TEST" />
+    <property name="natural.ant.project.steplib.nsv" value="SYSTEM" />
+    <!-- ### ANT_DEPLOY_PROPERTIES_END ###   -->
+  </target>
+    
+  
+  <target name="-initProperties">
+    <!-- set some property values based on other loaded properties -->
+
+    <!-- set repository properties -->    
+    <condition property="natural.ant.repository.type.svn" value="yes">
+      <or>
+        <equals arg1="${natural.ant.repository.type}" arg2="SVN"/>
+        <equals arg1="${natural.ant.repository.type}" arg2="svn"/>
+      </or>
+    </condition>
+    <condition property="natural.ant.repository.type.cvs" value="yes">
+      <or>
+        <equals arg1="${natural.ant.repository.type}" arg2="CVS"/>
+        <equals arg1="${natural.ant.repository.type}" arg2="cvs"/>
+      </or>
+    </condition>  
+    <condition property="natural.ant.repository.type.git" value="yes">
+      <or>
+        <equals arg1="${natural.ant.repository.type}" arg2="GIT"/>
+        <equals arg1="${natural.ant.repository.type}" arg2="git"/>
+      </or>
+    </condition>  
+    <condition property="natural.ant.failonerror.internal" value="true" else="false">
+      <or>
+        <equals arg1="${natural.ant.failonerror}" arg2="yes"/>
+        <equals arg1="${natural.ant.failonerror}" arg2="YES"/>
+      </or>
+    </condition>  
+    <property name="natural.ant.tstamp.format" value="HH:mm:ss.SSS"/>
+  </target>
+  
+  
+  <target name="-setRootdir" depends="-setRootdirEclipse,-setRootdirNoEclipse">
+    <!-- set the rootdir -->
+  	<mkdir dir="${natural.ant.project.rootdir.active}"/>
+    <available file="${natural.ant.project.rootdir.active}" type="dir"
+               property="temp.natural.ant.project.rootdir.active.exists"/>
+    <fail unless="temp.natural.ant.project.rootdir.active.exists" 
+          message="ERROR: Root directory '${natural.ant.project.rootdir.active}' does not exist."/>    
+    <echo message="INFO: Using root directory '${natural.ant.project.rootdir.active}'"/>
+  </target>
+
+      
+  <target name="-setRootdirEclipse" if="natural.eclipse.running">
+    <!-- set the rootdir in case of running inside Eclipse -->
+    <property name="natural.ant.project.rootdir.active" value=".."/>
+  </target>
+
+    
+  <target name="-setRootdirNoEclipse" depends="-setRootdirNoEclipseGit,-setRootdirNoEclipseNoGit" 
+  	      unless="natural.eclipse.running">
+    <!-- set the rootdir in case of running outside Eclipse -->
+  </target>
+	
+	
+  <target name="-setRootdirNoEclipseGit" if="natural.ant.repository.type.git">
+    <!-- set the rootdir in case of running outside Eclipse with Git -->
+    <property name="natural.ant.project.rootdir.active" value="${natural.ant.project.rootdir}/${natural.ant.project.name}"/>
+  </target>
+    
+  <target name="-setRootdirNoEclipseNoGit" unless="natural.ant.repository.type.git">
+    <!-- set the rootdir in case of running outside Eclipse without Git -->
+    <property name="natural.ant.project.rootdir.active" value="${natural.ant.project.rootdir}"/>
+  </target>
+	    
+    
+  <target name="-checkProjectdir">
+    <!-- check projectdir for validity -->
+    <available file="${natural.ant.project.rootdir.active}/${natural.ant.project.name}" type="dir"
+               property="temp.natural.ant.project.rootdir.project.exists"/>
+    <fail unless="temp.natural.ant.project.rootdir.project.exists" 
+          message="ERROR: Project '${natural.ant.project.name}' does not exist in root directory '${natural.ant.project.rootdir.active}'"/>
+    <echo message="INFO: Using project '${natural.ant.project.name}' in root directory '${natural.ant.project.rootdir.active}'"/>
+  </target>
+
+
+  <path id="natural.ant.searchpath">
+    <pathelement location="${natural.eclipse.bundle.location}/com.softwareag.naturalone.natural.ant/bin"/>
+    <pathelement location="${natural.eclipse.bundle.location}/com.softwareag.naturalone.natural.ndvserveraccess/bin"/>
+    <pathelement location="${natural.eclipse.bundle.location}/com.softwareag.naturalone.natural.auxiliary/bin"/>
+    <pathelement path="${classpath}"/>
+    <fileset dir="${natural.eclipse.home}">
+      <include name="plugins/com.softwareag.naturalone.natural.ant*.jar"/>
+      <include name="plugins/com.softwareag.naturalone.natural.ndvserveraccess*.jar"/>
+      <include name="plugins/com.softwareag.naturalone.natural.auxiliary*.jar"/>
+      <include name="plugins/com.ibm.icu.charset_4.8.1.jar"/>
+      <include name="plugins/com.ibm.naturalone.icu_4.8.1.jar"/>
+    </fileset>
+  </path>
+  
+  
+  <target name="-defineTaskEclipse" if="natural.eclipse.home">
+    <!-- define task     -->	
+    <antcall target="-printTimestamp">
+      <param name="message" value="start of defineTaskEclipse" />
+    </antcall>
+    <taskdef name="natantbuild" 
+             classname="com.softwareag.naturalone.natural.ant.tasks.NaturalAntBuilderTask" >
+      <classpath refid="natural.ant.searchpath"/>
+    </taskdef>
+    <taskdef name="natantcrypt" 
+             classname="com.softwareag.naturalone.natural.ant.tasks.NaturalAntEncryptionTask" >
+      <classpath refid="natural.ant.searchpath"/>
+    </taskdef>
+    <antcall target="-printTimestamp">
+      <param name="message" value="end of defineTaskEclipse" />
+    </antcall>
+  </target>
+
+  <target name="-defineTaskNoEclipse" unless="natural.eclipse.home">
+    <!-- define task     -->	
+    <antcall target="-printTimestamp">
+      <param name="message" value="start of defineTaskNoEclipse" />
+    </antcall>
+    <taskdef name="natantbuild" 
+             classname="com.softwareag.naturalone.natural.ant.tasks.NaturalAntBuilderTask" >
+    </taskdef>
+    <taskdef name="natantcrypt" 
+             classname="com.softwareag.naturalone.natural.ant.tasks.NaturalAntEncryptionTask" >
+    </taskdef>
+    <antcall target="-printTimestamp">
+      <param name="message" value="end of defineTaskNoEclipse" />
+    </antcall>
+  </target>
+	
+	
+  <target name="-printTimestamp" if="natural.ant.tstamp.format">
+  	<tstamp>
+        <format property="current.time" pattern="${natural.ant.tstamp.format}" />
+  	</tstamp>
+  	<echo message="TIMESTAMP: ${message} : ${current.time}" />
+  </target>
+	
+  
+  <target name="-init" depends="-printHeader,-setProperties,-initProperties,-setRootdir,-defineTaskEclipse,-defineTaskNoEclipse">
+  </target>
+    
+  <target name="-printHeader">
+      <echo message="*****************************************************************"/> 
+      <echo message="*  ANT Natural Deployment Script:"/> 
+      <echo message="*  ${ant.file}"/> 
+      <echo message="*****************************************************************"/> 
+  </target>
+  
+  
+  <target name="checkout" depends="-init,-rep_password,-svn_checkout,-cvs_checkout,-git_checkout"
+          unless="natural.eclipse.running"
+          description="performs a checkout of the sources from the corresponding versioning system">
+    <!--  distinguish between SVN and CVS and GIT -->
+  </target>
+
+  
+  <target name="-svn_checkout" if="natural.ant.repository.type.svn" 
+                               unless="natural.eclipse.running">
+    <!-- initial checkout  -->
+      <antcall target="-printTimestamp">
+        <param name="message" value="start of checkout" />
+      </antcall>
+      <exec executable="svn" failonerror="${natural.ant.failonerror.internal}">
+       <arg value="checkout"/>
+       <arg value="--username"/>
+       <arg value="${natural.ant.repository.username}"/>
+       <arg value="--password"/>
+       <arg value="${internal.natural.ant.repository.password}"/>
+       <arg value="${natural.ant.repository.url}"/>
+       <arg value="${natural.ant.project.rootdir.active}/${natural.ant.project.name}"/>
+       <arg value="-r${natural.ant.repository.version}"/>
+      </exec>
+      <antcall target="-printTimestamp">
+        <param name="message" value="end of checkout" />
+      </antcall>
+  </target>  
+  
+  
+  <target name="-cvs_cvsroot" if="natural.ant.repository.type.cvs">
+    <property name="tmp.natural.cvsroot1" value="${natural.ant.repository.access.method}${natural.ant.repository.username}"/>
+    <condition property="tmp.natural.cvsroot2" value="${tmp.natural.cvsroot1}:${internal.natural.ant.repository.password}" else="${tmp.natural.cvsroot1}">
+      <and>
+        <isset property="internal.natural.ant.repository.password"/>
+        <not>
+          <equals arg1="${internal.natural.ant.repository.password}" arg2=""/>
+        </not>
+      </and>
+    </condition>
+    <property name="tmp.natural.cvsroot3" value="${tmp.natural.cvsroot2}${natural.ant.repository.url}"/>
+    <!--  finally set cvsroot -->
+    <property name="natural.ant.repository.cvsroot" value="${tmp.natural.cvsroot3}"/>
+  </target>
+
+  <target name="-cvs_checkout" if="natural.ant.repository.type.cvs" 
+                               unless="natural.eclipse.running"
+                               depends="-cvs_cvsroot">
+    <!-- initial checkout  -->
+      <antcall target="-printTimestamp">
+        <param name="message" value="start of checkout" />
+      </antcall>
+      <cvs cvsRoot="${natural.ant.repository.cvsroot}"
+           command="checkout -d &quot;${natural.ant.project.name}&quot;"
+           package="&quot;${natural.ant.repository.module}&quot;"
+           dest="${natural.ant.project.rootdir.active}"
+           tag="${natural.ant.repository.version}"
+      	   failonerror="${natural.ant.failonerror.internal}"
+       />
+      <antcall target="-printTimestamp">
+        <param name="message" value="end of checkout" />
+      </antcall>
+  </target>  
+
+  
+  <target name="-git_checkout" if="natural.ant.repository.type.git" 
+	                               unless="natural.eclipse.running">
+    <!-- initial checkout  -->
+      <antcall target="-printTimestamp">
+        <param name="message" value="start of checkout" />
+      </antcall>
+      <exec executable="git" failonerror="${natural.ant.failonerror.internal}">
+        <arg value="clone"/>
+        <arg value="--branch"/>
+        <arg value="${natural.ant.repository.version}"/>
+        <arg value="${natural.ant.repository.url}"/>
+        <arg value="${natural.ant.project.rootdir.active}"/>
+      </exec>
+      <antcall target="-printTimestamp">
+        <param name="message" value="end of checkout" />
+      </antcall>
+  </target>  
+	  
+	  
+  <target name="update" depends="-init,-checkProjectdir,-rep_password,-svn_update,-cvs_update,-git_update"
+          unless="natural.eclipse.running"
+          description="performs an incremental update on the sources from the versioning system">
+    <!--  distinguish between SVN and CVS and GIT -->
+  </target>
+
+  
+  <target name="-svn_update" if="natural.ant.repository.type.svn"
+                             unless="natural.eclipse.running">
+    <!-- repository update  -->
+      <antcall target="-printTimestamp">
+        <param name="message" value="start of update" />
+      </antcall>
+      <exec executable="svn" failonerror="${natural.ant.failonerror.internal}">
+       <arg value="update"/>
+       <arg value="${natural.ant.project.rootdir.active}/${natural.ant.project.name}"/>
+       <arg value="-r${natural.ant.repository.version}"/>
+      </exec>
+      <antcall target="-printTimestamp">
+        <param name="message" value="end of update" />
+      </antcall>
+  </target>
+  
+  
+  <target name="-cvs_update" if="natural.ant.repository.type.cvs" 
+                             unless="natural.eclipse.running"
+                             depends="-cvs_cvsroot">
+    <!-- repository update  -->
+      <antcall target="-printTimestamp">
+        <param name="message" value="start of update" />
+      </antcall>
+      <cvs cvsRoot="${natural.ant.repository.cvsroot}"
+           command="update -d"
+           dest="${natural.ant.project.rootdir.active}"
+      	   failonerror="${natural.ant.failonerror.internal}"
+       />
+      <antcall target="-printTimestamp">
+        <param name="message" value="end of update" />
+      </antcall>
+  </target>
+
+  
+  <target name="-git_update" if="natural.ant.repository.type.git"
+	                         unless="natural.eclipse.running">
+  	<!-- repository update  -->
+      <antcall target="-printTimestamp">
+        <param name="message" value="start of update" />
+      </antcall>
+	  <exec executable="git" dir="${natural.ant.project.rootdir.active}" 
+	  	    failonerror="${natural.ant.failonerror.internal}">
+	    <arg value="pull"/>
+        <arg value="origin"/>
+	  </exec>
+      <antcall target="-printTimestamp">
+        <param name="message" value="end of update" />
+      </antcall>
+  </target>
+	  
+	  
+  <target name="-rep_password">
+    <!-- repository passwords  -->
+    <natantcrypt input="natural.ant.repository.password" 
+                 encryption="natural.ant.project.password.encryption"
+                 output="internal.natural.ant.repository.password" />
+  </target>
+
+  
+  <target name="build" 
+  	      depends="-init,-checkProjectdir,-initBuild,-checkBuildDone,-processBuild"
+          description="performs a build process with the current project">
+    <!--  refer to the build target -->
+    <property name="natural.ant.build.done.internal" value="true"/>  	
+  </target>
+    
+	
+  <target name="checkts" 
+  	      depends="-init,-checkProjectdir,-initCheckts,-checkBuildDone,-processBuild"
+          description="performs time stamp checking">
+   	<!--  refer to the checkts target -->
+    <property name="natural.ant.build.done.internal" value="true"/>  	
+  </target>
+		    
+	    
+   <target name="-checkBuildDone" if="natural.ant.build.done.internal">
+	 <!-- build and checkts may only be used exclusively -->
+   	<echo message="WARNING: Targets 'build' and 'checkts' may only be used exclusively"/>
+   </target>
+
+		
+  <target name="-initBuild">
+    <!-- specific initialization for build target -->
+    <property name="natural.ant.build.modified.update" value="true"/>
+  </target>
+
+	
+  <target name="-initCheckts">
+    <!-- specific initialization for checkts target -->
+    <property name="natural.ant.build.modified.update" value="false"/>
+  </target>
+
+	
+  <target name="-setProcessBuildProperties">
+    <!-- specific properties used during processBuild -->
+  	<basename property="natural.ant.project.deploy.file.name.base" file="${natural.ant.project.deploy.file.name}" suffix=".xml"/>
+  	<property name="natural.ant.project.cache.properties.file.name" 
+  		      value="cache_${natural.ant.project.deploy.file.name.base}_${natural.ant.project.name}.properties"/>
+  	<property name="natural.ant.project.timestamp.properties.file.name" 
+  		      value="timestamp_${natural.ant.project.deploy.file.name.base}_${natural.ant.project.name}.properties"/>
+  </target>
+	
+  <target name="-processBuild"
+  	      depends="-setProcessBuildProperties"
+  	      unless="natural.ant.build.done.internal">
+	<!-- perform build task -->
+  	<antcall target="-printTimestamp">
+  	  <param name="message" value="start of build" />
+  	</antcall>
+  	
+	<natantbuild>
+	  <projectfiles>
+	      <fileset dir="${natural.ant.project.rootdir.active}/${natural.ant.project.name}">
+	      <include name="**/*"/>
+	      <exclude name="**/.*"/>
+	      <exclude name=".*/**"/>
+	    </fileset>
+	  </projectfiles>
+	  <changedfiles>
+	    <fileset dir="${natural.ant.project.rootdir.active}/${natural.ant.project.name}">
+	      <include name="**/*"/>
+	      <exclude name="**/.*"/>
+	      <exclude name=".*/**"/>
+	      <modified>
+	      	<param name="update" value="${natural.ant.build.modified.update}"/>
+	      	<param name="cache.cachefile" value="${natural.ant.project.cache.properties.file.name}"/>
+	      </modified>
+	    </fileset>
+	  </changedfiles>
+	  <specialfiles>
+	      <fileset dir="${natural.ant.project.rootdir.active}/${natural.ant.project.name}">
+            <include name=".natural"/>
+	      </fileset>
+	  </specialfiles>
+	</natantbuild>
+	<fail message="natantbuild returned: ${natural.ant.task.exit.code}" 
+		  status="${natural.ant.task.exit.code}">
+	  <condition>
+	 	  <and>
+	 	    <equals arg1="${natural.ant.failonerror.internal}" arg2="true"/>
+	        <not>
+	  	      <equals arg1="${natural.ant.task.exit.code}" arg2="0"/>
+	  	    </not>
+	  	  </and>
+	  </condition>
+	</fail>
+  	
+    <antcall target="-printTimestamp">
+      <param name="message" value="end of build" />
+    </antcall>
+  </target>
+	
+	
+</project>

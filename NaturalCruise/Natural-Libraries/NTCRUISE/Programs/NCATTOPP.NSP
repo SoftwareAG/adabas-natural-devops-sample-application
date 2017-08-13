@@ -1,0 +1,43 @@
+* >Natural Source Header 000000
+* :Mode S
+* :CP
+* <Natural Source Header
+/** <h1>Program NCATTOPP.</h1>
+/** <p>Natural Course - Example Program</p>
+/** <p>Contents:</p>
+/**     <ul type="square">
+/**         <li>AT TOP OF PAGE Statement</li>
+/**         <li>*LINE-COUNT</li>
+/**         <li>*PAGE-NUMBER</li>
+/**     </ul>
+/** :author Training
+/* TODO Enter your code here
+DEFINE DATA LOCAL
+  USING NCDEMAPL
+LOCAL
+1 #LINE-INFO (A150)
+END-DEFINE
+*
+FORMAT PS=15 LS=200
+*
+AT TOP OF PAGE
+  COMPRESS '----------- Page:' *PAGE-NUMBER
+    INTO #LINE-INFO
+  WRITE NOTITLE NOHDR #LINE-INFO /
+END-TOPPAGE
+*
+READ (40) NCCRUISE
+  FIND NCYACHT YACHT-ID = NCCRUISE.ID-YACHT
+*
+    WRITE NOHDR 
+      NCYACHT.YACHT-NAME (AL=15)
+      NCCRUISE.START-DATE (EM=9999'-'99'-'99)
+      NCCRUISE.END-DATE (EM=9999'-'99'-'99)
+      NCCRUISE.START-HARBOR (AL=15)
+      NCCRUISE.DESTINATION-HARBOR (AL=15)
+      '-' *LINE-COUNT
+*
+  END-FIND
+END-READ
+*
+END

@@ -1,0 +1,38 @@
+DEFINE DATA LOCAL
+/* >Natural Source Header 000000
+/* :Mode S
+/* :CP
+/* <Natural Source Header
+/** <h1>Local Data Area NCDEMAPL.</h1>
+/** <p>Natural Course - Example LDA</p>
+/** <p>New important Statements:</p>
+/**     <ul type="square">
+/**         <li>n.a.</li>
+/**     </ul>
+/** :author Training
+/* TODO Enter your data definitions here
+/*( imported data fields from Data Definition Module NCCRUISE
+1 NCCRUISE VIEW OF NCCRUISE
+  2 CRUISE-ID (N8.0)
+  2 CRUISE-STATUS (A1)
+  2 CRUISE-START
+    3 START-DATE (N8.0)
+    3 START-TIME (N6.0)
+  2 CRUISE-END
+    3 END-DATE (N8.0)
+    3 END-TIME (N6.0)
+  2 START-HARBOR (A20)
+  2 DESTINATION-HARBOR (A20)
+  2 ID-YACHT (N8.0) 
+  2 PRICES
+    3 PRICE-1W (P10.3)
+    3 PRICE-2W (P10.3)
+    3 PRICE-3W (P10.3)
+/*) imported data fields from Data Definition Module NCCRUISE
+/*( imported data fields from Data Definition Module NCYACHT
+1 NCYACHT VIEW OF NCYACHT
+  2 YACHT-ID (N8.0)
+  2 YACHT-NAME (A30)
+/*) imported data fields from Data Definition Module NCYACHT
+
+END-DEFINE

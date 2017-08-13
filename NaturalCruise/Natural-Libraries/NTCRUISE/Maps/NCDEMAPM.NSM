@@ -1,0 +1,108 @@
+* >Natural Source Header 000000
+* :Mode S
+* :CP
+* <Natural Source Header
+* MAP2: PROTOTYPE VERSION 820 --- CREATED BY ONE 8.3.6 ---
+* INPUT USING MAP 'XXXXXXXX'
+*     #CR-ED #CR-ET #CR-FROMH #CR-ID #CR-ID-CONTROL #CR-ID-IO #CR-P1W #CR-P2W
+*     #CR-P3W #CR-SD #CR-ST #CR-STATUS #CR-TOH #CR-YACHT-NAME
+DEFINE DATA PARAMETER
+1 #CR-ED (A013)
+1 #CR-ET (A007)
+1 #CR-FROMH (A020)
+1 #CR-ID (N08.0)
+1  #CR-ID-CONTROL (C)
+1 #CR-ID-IO (N08.0)
+1 #CR-P1W (A020)
+1 #CR-P2W (A020)
+1 #CR-P3W (A020)
+1 #CR-SD (A013)
+1 #CR-ST (A007)
+1 #CR-STATUS (A020)
+1 #CR-TOH (A020)
+1 #CR-YACHT-NAME (A020)
+END-DEFINE
+FORMAT PS=024 LS=080 ZP=OFF SG=OFF KD=OFF IP=OFF
+* MAP2: MAP PROFILES *****************************        200***********
+* .TTAAAMMOO   D I D I N D I D I        ?_)^&:+(   'NCDEMAPH'          *
+* 024079        Y0NNUCN             X        01 SYSPROF NR             *
+************************************************************************
+INPUT          (     IP=OFF                                           /*
+                                                                       )
+/
+ 002T *USER /*.02S008 A008 .
+      (AD=OD HE='NCDEMAPH' )
+ 024T 'Natural Class - Cruise Planning'(U)
+ 071T *TIMX /*.01S008 T    .
+      (AD=OD HE='NCDEMAPH' )
+/
+ 001T '_' (079)
+/
+/
+ 018T #CR-ID /*.99U008 N08.0.
+      (AD=MIZ CV=#CR-ID-CONTROL HE='NCDEMAPH' )
+ 040T #CR-YACHT-NAME /*.99U020 A020 .
+      (AD=MIZ HE='NCDEMAPH' )
+/
+ 018T 'Cruise-id'(C)
+ 040T 'Yacht-Name'(C)
+/
+ 018T #CR-FROMH /*.99U020 A020 .
+      (AD=MIZ HE='NCDEMAPH' )
+ 040T #CR-TOH /*.99U020 A020 .
+      (AD=MIZ HE='NCDEMAPH' )
+/
+ 018T 'from Harbor'(C)
+ 040T 'to Harbor'(C)
+/
+ 018T #CR-SD /*.99U013 A013 .
+      (AD=MIZ HE='NCDEMAPH' )
+ 031T #CR-ST /*.99U007 A007 .
+      (AD=MIZ HE='NCDEMAPH' )
+ 040T #CR-ED /*.99U013 A013 .
+      (AD=MIZ HE='NCDEMAPH' )
+ 053T #CR-ET /*.99U007 A007 .
+      (AD=MIZ HE='NCDEMAPH' )
+/
+ 018T 'starting'(C)
+ 040T 'ending'(C)
+/
+/
+ 018T #CR-STATUS /*.99U020 A020 .
+      (AD=MIZ HE='NCDEMAPH' )
+ 040T #CR-P1W /*.99U020 A020 .
+      (AD=MIZ HE='NCDEMAPH' )
+/
+ 018T 'Status'(C)
+ 040T 'price one week'(C)
+/
+ 040T #CR-P2W /*.99U020 A020 .
+      (AD=MIZ HE='NCDEMAPH' )
+/
+ 040T 'price two weeks'(C)
+/
+ 040T #CR-P3W /*.99U020 A020 .
+      (AD=MIZ HE='NCDEMAPH' )
+/
+ 040T 'price three weeks'(C)
+/
+/
+ 018T 'Select Cruise by Id:'
+ 040T #CR-ID-IO /*.99U008 N08.0.
+      (AD=MDLTE HE='NCDECIDH',#CR-ID-IO )
+/
+ 001T '_' (079)
+/
+ 002T 'F1-Help  F2-Show Cruise  F3-Stop Program'
+/
+/
+/
+* MAP2: VALIDATION *****************************************************
+RULEVAR F00#CR-ID-IO                                                        
+INCDIC                                 ;
+IF & = 0 AND *PF-KEY NE 'PF3'
+  REINPUT 'Please enter a valid cruise id.'
+  MARK *&
+END-IF
+* MAP2: END OF MAP *****************************************************
+END

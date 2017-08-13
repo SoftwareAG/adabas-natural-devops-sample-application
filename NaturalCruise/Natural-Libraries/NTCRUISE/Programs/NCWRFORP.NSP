@@ -1,0 +1,31 @@
+* >Natural Source Header 000000
+* :Mode S
+* :CP
+* <Natural Source Header
+/** <h1>Program NCWRFORP.</h1>
+/** <p>Natural Course - Example Program</p>
+/** <p>Contents:</p>
+/**     <ul type="square">
+/**         <li>WRITE USING FORM Statement</li>
+/**     </ul>
+/** :author Training
+DEFINE DATA LOCAL
+*
+1 MAPFIELDS
+  2 #CR-ED (A013)         INIT <'2015-08-01'>
+  2 #CR-ET (A007)         INIT <'7 h'>
+  2 #CR-FROMH (A020)      INIT <'Samos'>
+  2 #CR-ID (N08.0)        INIT <12345678>
+  2 #CR-P1W (A020)        INIT <'1000.00'>
+  2 #CR-P2W (A020)        INIT <'2000.00'>
+  2 #CR-P3W (A020)        INIT <'3000.00'>
+  2 #CR-SD (A013)         INIT <'2015-08-20'>
+  2 #CR-ST (A007)         INIT <'10 h'>
+  2 #CR-STATUS (A020)     INIT <'available'>
+  2 #CR-TOH (A020)        INIT <'Santorini'>
+  2 #CR-YACHT-NAME (A020) INIT <'Cassandra'>
+END-DEFINE
+*
+WRITE USING FORM  'NCDEFORM'
+*
+END

@@ -1,0 +1,33 @@
+* >Natural Source Header 000000
+* :Mode S
+* :CP
+* <Natural Source Header
+/** <h1>Program NCDEDISP.</h1>
+/** <p>Natural Course - Example Program</p>
+/** <p>Contents:</p>
+/**     <ul type="square">
+/**         <li>DISPLAY Statement</li>
+/**         <li>with EDIT Mask</li>
+/**     </ul>
+/** :author Training
+DEFINE DATA LOCAL
+  USING NCDEMAPL
+END-DEFINE
+*
+FORMAT LS=100
+*
+READ (100) NCCRUISE
+  FIND NCYACHT YACHT-ID = NCCRUISE.ID-YACHT
+*
+    DISPLAY
+      NCYACHT.YACHT-NAME
+      NCCRUISE.START-DATE (EM=9999'-'99'-'99)
+      NCCRUISE.START-HARBOR (AL=10)
+      NCCRUISE.END-DATE (EM=9999'-'99'-'99)
+      NCCRUISE.DESTINATION-HARBOR (AL=10)
+      NCCRUISE.PRICE-1W (EM=*EUR' 'ZZZZ9.99)
+*
+  END-FIND
+END-READ
+*
+END
