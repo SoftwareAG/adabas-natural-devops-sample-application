@@ -8,7 +8,8 @@
 /**     <ul type="square">
 /**         <li>INPUT USING MAP Statement</li>
 /**     </ul>
-/** :author Eddie batmanMorgenrood
+/**      =======
+/**
 DEFINE DATA LOCAL
   USING NCDEMAPL
 LOCAL
