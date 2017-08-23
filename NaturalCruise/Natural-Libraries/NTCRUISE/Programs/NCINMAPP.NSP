@@ -8,7 +8,11 @@
 /**     <ul type="square">
 /**         <li>INPUT USING MAP Statement</li>
 /**     </ul>
+<<<<<<< HEAD
 /**      ======= donkiekongman -----
+=======
+/**      ======= donkiekong
+>>>>>>> refs/remotes/origin/feature1
 /**
 DEFINE DATA LOCAL
   USING NCDEMAPL
