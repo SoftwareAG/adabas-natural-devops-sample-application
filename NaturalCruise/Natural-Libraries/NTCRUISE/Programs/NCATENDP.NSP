@@ -11,11 +11,9 @@
 /**         <li>*LINE-COUNT</li>
 /**         <li>*PAGE-NUMBER</li>
 /**     </ul>
-<<<<<<< HEAD
-/** :author edward morgenrood test devops again for Diellie
-=======
+/**
+/** 
 /** :author edward morgenrood test devops again 24/Aug/2017
->>>>>>> refs/remotes/origin/feature1
 /* TODO Enter your code here
 DEFINE DATA LOCAL
   USING NCDEMAPL
