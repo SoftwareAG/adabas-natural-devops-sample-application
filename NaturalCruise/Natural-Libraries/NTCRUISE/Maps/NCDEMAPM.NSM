@@ -2,9 +2,9 @@
 * :Mode S
 * :CP
 * <Natural Source Header
-* MAP2: PROTOTYPE VERSION 820 --- CREATED BY ONE 8.3.6 ---
+* MAP2: PROTOTYPE VERSION 820 --- CREATED BY ONE 8.3.8 ---
 * INPUT USING MAP 'XXXXXXXX'
-*     #CR-ED #CR-ET #CR-FROMH #CR-ID #CR-ID-CONTROL #CR-ID-IO #CR-P1W #CR-P2W
+*     #CR-ED #CR-ET #CR-FROMH #CR-ID #CR-ID-CONTROL #CR-ID-FIND #CR-P1W #CR-P2W
 *     #CR-P3W #CR-SD #CR-ST #CR-STATUS #CR-TOH #CR-YACHT-NAME
 DEFINE DATA PARAMETER
 1 #CR-ED (A013)
@@ -12,7 +12,7 @@ DEFINE DATA PARAMETER
 1 #CR-FROMH (A020)
 1 #CR-ID (N08.0)
 1  #CR-ID-CONTROL (C)
-1 #CR-ID-IO (N08.0)
+1 #CR-ID-FIND (N08.0)
 1 #CR-P1W (A020)
 1 #CR-P2W (A020)
 1 #CR-P3W (A020)
@@ -88,8 +88,8 @@ INPUT          (     IP=OFF                                           /*
 /
 /
  018T 'Select Cruise by Id:'
- 040T #CR-ID-IO /*.99U008 N08.0.
-      (AD=MDLTE HE='NCDECIDH',#CR-ID-IO )
+ 040T #CR-ID-FIND /*.99U008 N08.0.
+      (AD=MDLTE HE='NCDECIDH',#CR-ID-FIND )
 /
  001T '_' (079)
 /
@@ -98,7 +98,7 @@ INPUT          (     IP=OFF                                           /*
 /
 /
 * MAP2: VALIDATION *****************************************************
-RULEVAR F00#CR-ID-IO                                                        
+RULEVAR F00#CR-ID-FIND                                                      
 INCDIC                                 ;
 IF & = 0 AND *PF-KEY NE 'PF3'
   REINPUT 'Please enter a valid cruise id.'
