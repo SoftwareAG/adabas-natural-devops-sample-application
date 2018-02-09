@@ -1,0 +1,23 @@
+DEFINE DATA PARAMETER
+/* >Natural Source Header 000000
+/* :Mode S
+/* :CP
+/* <Natural Source Header
+/** New Parameter Data Area NCDEMAPP.
+/**
+/** :author ziv
+1 NC-PARMS
+  2 #CR-ID-FIND (N08.0)
+  2 #CR-ID (N08.0)
+  2 #CR-ED (A013)
+  2 #CR-ET (A007)
+  2 #CR-FROMH (A020)
+  2 #CR-P1W (A020)
+  2 #CR-P2W (A020)
+  2 #CR-P3W (A020)
+  2 #CR-SD (A013)
+  2 #CR-ST (A007)
+  2 #CR-STATUS (A020)
+  2 #CR-TOH (A020)
+  2 #CR-YACHT-NAME (A020)
+END-DEFINE

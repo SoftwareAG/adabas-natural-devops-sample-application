@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEMPLATE date="2017-11-08" environment="" name="CruiseList"
+    time="16:16:32" type="DataBrowser" user="" version="1.0">
+    <DEFINITIONS>
+        <DESCRIPTION>Report for DDM NCCRUISE</DESCRIPTION>
+        <RECORDLIMIT>100</RECORDLIMIT>
+        <FILTEREDBY>&gt;&gt; Physical Read &lt;&lt;</FILTEREDBY>
+        <OPTIONS>
+            <USEEDITMASK>None</USEEDITMASK>
+            <USEFIELDHEADER>None</USEFIELDHEADER>
+        </OPTIONS>
+    </DEFINITIONS>
+    <DDM dbid="012" fnr="041" name="NCCRUISE" type="ada">
+        <FIELD Checked="X" Descriptor="D" Editmask="" Format="N"
+            Header="" Length="8.0" Level="1" Name="CRUISE-ID" Type=""/>
+        <FIELD Checked="X" Descriptor="" Editmask="" Format="A"
+            Header="" Length="1" Level="1" Name="CRUISE-STATUS" Type=""/>
+        <FIELD Checked="X" Descriptor="" Editmask="" Format="" Header=""
+            Length="" Level="1" Name="CRUISE-START" Type="G"/>
+        <FIELD Checked="X" Descriptor="D" Editmask="" Format="N"
+            Header="" Length="8.0" Level="2" Name="START-DATE" Type=""/>
+        <FIELD Checked="X" Descriptor="" Editmask="" Format="N"
+            Header="" Length="6.0" Level="2" Name="START-TIME" Type=""/>
+        <FIELD Checked="X" Descriptor="" Editmask="" Format="" Header=""
+            Length="" Level="1" Name="CRUISE-END" Type="G"/>
+        <FIELD Checked="X" Descriptor="D" Editmask="" Format="N"
+            Header="" Length="8.0" Level="2" Name="END-DATE" Type=""/>
+        <FIELD Checked="X" Descriptor="" Editmask="" Format="N"
+            Header="" Length="6.0" Level="2" Name="END-TIME" Type=""/>
+        <FIELD Checked="X" Descriptor="D" Editmask="" Format="A"
+            Header="" Length="20" Level="1" Name="START-HARBOR" Type=""/>
+        <FIELD Checked="X" Descriptor="D" Editmask="" Format="A"
+            Header="" Length="20" Level="1" Name="DESTINATION-HARBOR" Type=""/>
+        <FIELD Checked="X" Descriptor="D" Editmask="" Format="N"
+            Header="" Length="8.0" Level="1" Name="ID-YACHT" Type=""/>
+        <FIELD Checked="X" Descriptor="" Editmask="" Format="" Header=""
+            Length="" Level="1" Name="PRICES" Type="G"/>
+        <FIELD Checked="X" Descriptor="" Editmask="" Format="P"
+            Header="" Length="10.3" Level="2" Name="PRICE-1W" Type=""/>
+        <FIELD Checked="X" Descriptor="" Editmask="" Format="P"
+            Header="" Length="10.3" Level="2" Name="PRICE-2W" Type=""/>
+        <FIELD Checked="X" Descriptor="" Editmask="" Format="P"
+            Header="" Length="10.3" Level="2" Name="PRICE-3W" Type=""/>
+    </DDM>
+    <GENERALFIELDS>
+        <FIELD Checked="X" Editmask="" Format="I" Header="" Length="4"
+            Level="1" Name=".COUNTER" Type="#"/>
+        <FIELD Checked="X" Editmask="" Format="P" Header="" Length="10"
+            Level="1" Name="*ISN" Type="#"/>
+    </GENERALFIELDS>
+</TEMPLATE>
