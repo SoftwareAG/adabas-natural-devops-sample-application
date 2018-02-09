@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project default="default" name="Natural Unit Tests">
+  <target name="init">
+    <property name="broker.environmentID" value="Test RPC Server" />
+    <property name="test.dir" value="/var/lib/jenkins/workspace/NatCITest/NaturalCruise" />
+    <property name="NaturalTestingJunitLogger.file" value="/var/lib/jenkins/workspace/NatCITest/NaturalCruise/log.xml" />
+  </target>
+  <target depends="init" name="default">
+    <!-- Change logtests to "true" if you want test history to be saved -->
+    <testsuite failureProperty="is.unit.test.failure" haltOnFailure="false" logtests="false" name="tests" setProjectSteplibs="true">
+      <connection EnvironmentName="${broker.environmentID}" />
+      <!-- Run all the available unit tests from a folder -->
+      <fileset dir="${test.dir}">
+        <include name="**/*.nattst" />
+        <include name="**/*.bsrvtst" />
+        <include name="**/*.exttst" />
+        <include name="/**/*.seqtst" />
+      </fileset>
+    </testsuite>
+    <!-- Let test fail if there was one failure during testing -->
+    <fail if="is.unit.test.failure" status="1" />
+  </target>
+</project>

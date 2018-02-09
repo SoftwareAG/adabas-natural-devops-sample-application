@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<java version="1.8.0_101" class="java.beans.XMLDecoder">
+ <object class="com.softwareag.naturalone.gen.testing.eclipse.external.ui.editors.unittester.natural.model.NaturalTest" id="NaturalTest0">
+  <void property="connection">
+   <void property="ID">
+    <string>192.168.229.138:1971</string>
+   </void>
+   <void property="RPCName">
+    <string>192.168.229.138:1971@RPC/SRVDEV/CALLNAT</string>
+   </void>
+   <void property="encryptedPassword">
+    <null/>
+   </void>
+   <void property="encryptedRpcPassword">
+    <null/>
+   </void>
+   <void property="rpcUserID">
+    <string>CT-DEV</string>
+   </void>
+   <void property="server">
+    <string>RPC/RPCDEV/CALLNAT</string>
+   </void>
+   <void property="userID">
+    <string>CT-DEV</string>
+   </void>
+  </void>
+  <void property="input">
+   <void method="add">
+    <object class="com.softwareag.naturalone.gen.testing.eclipse.external.ui.editors.unittester.natural.model.TestField" id="TestField0">
+     <void id="booleanArray0" property="VDimensions"/>
+     <void property="VDimensions">
+      <object idref="booleanArray0"/>
+     </void>
+     <void id="intArray0" property="actualDimensions"/>
+     <void property="actualDimensions">
+      <object idref="intArray0"/>
+     </void>
+     <void property="fieldLength">
+      <int>8</int>
+     </void>
+     <void property="fieldType">
+      <char>N</char>
+     </void>
+     <void property="fullName">
+      <string>NC-PARMS.#CR-ID-FIND</string>
+     </void>
+     <void property="index">
+      <array class="int" length="0"/>
+     </void>
+     <void property="value">
+      <string>00002010</string>
+     </void>
+    </object>
+   </void>
+  </void>
+  <void property="naturalSourcePath">
+   <string>NTCRUISE/NCFINDCR</string>
+  </void>
+  <void property="validators">
+   <void method="add">
+    <object class="com.softwareag.naturalone.gen.testing.eclipse.external.ui.editors.unittester.validators.StringValidator" id="StringValidator0">
+     <void id="booleanArray1" property="VDimensions"/>
+     <void property="VDimensions">
+      <object idref="booleanArray1"/>
+     </void>
+     <void id="intArray1" property="actualDimensions"/>
+     <void property="actualDimensions">
+      <object idref="intArray1"/>
+     </void>
+     <void property="fieldLength">
+      <int>20</int>
+     </void>
+     <void property="fieldType">
+      <char>A</char>
+     </void>
+     <void property="fullName">
+      <string>NC-PARMS.#CR-YACHT-NAME</string>
+     </void>
+     <void property="index">
+      <array class="int" length="0"/>
+     </void>
+     <void property="value">
+      <string>Lysistrata</string>
+     </void>
+    </object>
+   </void>
+  </void>
+ </object>
+</java>

@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<java version="1.8.0_101" class="java.beans.XMLDecoder">
+ <object class="com.softwareag.naturalone.gen.testing.eclipse.external.ui.editors.unittester.externaldata.model.ExternalDataTest" id="ExternalDataTest0">
+  <void property="connection">
+   <void property="ID">
+    <string>192.168.229.138:1971</string>
+   </void>
+   <void property="RPCName">
+    <string>192.168.229.138:1971@RPC/SRVDEV/CALLNAT</string>
+   </void>
+   <void property="encryptedPassword">
+    <null/>
+   </void>
+   <void property="encryptedRpcPassword">
+    <null/>
+   </void>
+   <void property="rpcUserID">
+    <string>CT-DEV</string>
+   </void>
+   <void property="server">
+    <string>RPC/RPCDEV/CALLNAT</string>
+   </void>
+   <void property="userID">
+    <string>CT-DEV</string>
+   </void>
+  </void>
+  <void property="dataFilePath">
+   <string>Testdata.csv</string>
+  </void>
+  <void property="headerRow">
+   <boolean>true</boolean>
+  </void>
+  <void property="mappings">
+   <array class="com.softwareag.naturalone.gen.testing.eclipse.external.ui.editors.unittester.externaldata.model.AbstractMapping" length="11">
+    <void index="0">
+     <object class="com.softwareag.naturalone.gen.testing.eclipse.external.ui.editors.unittester.externaldata.model.InputMapping">
+      <void property="PDAField">
+       <string>NC-PARMS.#CR-ID-FIND</string>
+      </void>
+      <void property="columnNumber">
+       <int>1</int>
+      </void>
+      <void property="index">
+       <array class="int" length="0"/>
+      </void>
+     </object>
+    </void>
+    <void index="1">
+     <object class="com.softwareag.naturalone.gen.testing.eclipse.external.ui.editors.unittester.externaldata.model.InputMapping">
+      <void property="PDAField">
+       <string>NC-PARMS.#CR-ED</string>
+      </void>
+      <void property="columnNumber">
+       <int>2</int>
+      </void>
+      <void property="index">
+       <array class="int" length="0"/>
+      </void>
+     </object>
+    </void>
+    <void index="2">
+     <object class="com.softwareag.naturalone.gen.testing.eclipse.external.ui.editors.unittester.externaldata.model.InputMapping">
+      <void property="PDAField">
+       <string>NC-PARMS.#CR-ET</string>
+      </void>
+      <void property="columnNumber">
+       <int>3</int>
+      </void>
+      <void property="index">
+       <array class="int" length="0"/>
+      </void>
+     </object>
+    </void>
+    <void index="3">
+     <object class="com.softwareag.naturalone.gen.testing.eclipse.external.ui.editors.unittester.externaldata.model.InputMapping">
+      <void property="PDAField">
+       <string>NC-PARMS.#CR-FROMH</string>
+      </void>
+      <void property="columnNumber">
+       <int>4</int>
+      </void>
+      <void property="index">
+       <array class="int" length="0"/>
+      </void>
+     </object>
+    </void>
+    <void index="4">
+     <object class="com.softwareag.naturalone.gen.testing.eclipse.external.ui.editors.unittester.externaldata.model.InputMapping">
+      <void property="PDAField">
+       <string>NC-PARMS.#CR-P1W</string>
+      </void>
+      <void property="columnNumber">
+       <int>5</int>
+      </void>
+      <void property="index">
+       <array class="int" length="0"/>
+      </void>
+     </object>
+    </void>
+    <void index="5">
+     <object class="com.softwareag.naturalone.gen.testing.eclipse.external.ui.editors.unittester.externaldata.model.InputMapping">
+      <void property="PDAField">
+       <string>NC-PARMS.#CR-P2W</string>
+      </void>
+      <void property="columnNumber">
+       <int>6</int>
+      </void>
+      <void property="index">
+       <array class="int" length="0"/>
+      </void>
+     </object>
+    </void>
+    <void index="6">
+     <object class="com.softwareag.naturalone.gen.testing.eclipse.external.ui.editors.unittester.externaldata.model.InputMapping">
+      <void property="PDAField">
+       <string>NC-PARMS.#CR-P3W</string>
+      </void>
+      <void property="columnNumber">
+       <int>7</int>
+      </void>
+      <void property="index">
+       <array class="int" length="0"/>
+      </void>
+     </object>
+    </void>
+    <void index="7">
+     <object class="com.softwareag.naturalone.gen.testing.eclipse.external.ui.editors.unittester.externaldata.model.InputMapping">
+      <void property="PDAField">
+       <string>NC-PARMS.#CR-SD</string>
+      </void>
+      <void property="columnNumber">
+       <int>8</int>
+      </void>
+      <void property="index">
+       <array class="int" length="0"/>
+      </void>
+     </object>
+    </void>
+    <void index="8">
+     <object class="com.softwareag.naturalone.gen.testing.eclipse.external.ui.editors.unittester.externaldata.model.InputMapping">
+      <void property="PDAField">
+       <string>NC-PARMS.#CR-ST</string>
+      </void>
+      <void property="columnNumber">
+       <int>9</int>
+      </void>
+      <void property="index">
+       <array class="int" length="0"/>
+      </void>
+     </object>
+    </void>
+    <void index="9">
+     <object class="com.softwareag.naturalone.gen.testing.eclipse.external.ui.editors.unittester.externaldata.model.ValidatorMapping">
+      <void property="PDAField">
+       <string>NC-PARMS.#CR-TOH</string>
+      </void>
+      <void property="columnNumber">
+       <int>10</int>
+      </void>
+      <void property="index">
+       <array class="int" length="0"/>
+      </void>
+      <void property="validatorName">
+       <string>StringValidator</string>
+      </void>
+     </object>
+    </void>
+    <void index="10">
+     <object class="com.softwareag.naturalone.gen.testing.eclipse.external.ui.editors.unittester.externaldata.model.ValidatorMapping">
+      <void property="PDAField">
+       <string>NC-PARMS.#CR-YACHT-NAME</string>
+      </void>
+      <void property="columnNumber">
+       <int>11</int>
+      </void>
+      <void property="index">
+       <array class="int" length="0"/>
+      </void>
+      <void property="validatorName">
+       <string>StringValidator</string>
+      </void>
+     </object>
+    </void>
+   </array>
+  </void>
+  <void property="name">
+   <string>ExtTest.exttst</string>
+  </void>
+  <void property="path">
+   <string>C:/Users/ziv/git/NaturalCruise/NaturalCruise/Testing-Suites/ExtTest.exttst</string>
+  </void>
+  <void property="testFilePath">
+   <string>NCFINDCR.nattst</string>
+  </void>
+ </object>
+</java>

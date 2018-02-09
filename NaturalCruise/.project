@@ -10,8 +10,14 @@
 			<arguments>
 			</arguments>
 		</buildCommand>
+		<buildCommand>
+			<name>com.softwareag.naturalone.gen.testing.eclipse.testingBuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
 	</buildSpec>
 	<natures>
 		<nature>com.softwareag.naturalone.natural.ide.naturalNature</nature>
+		<nature>com.softwareag.naturalone.gen.testing.eclipse.testingNature</nature>
 	</natures>
 </projectDescription>
