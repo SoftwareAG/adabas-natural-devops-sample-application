@@ -1,0 +1,57 @@
+* >Natural Source Header 000000
+* :Mode R
+* :CP
+* <Natural Source Header
+* MAP2: PROTOTYPE VERSION 820 --- CREATED BY ONE 9.1.1 ---
+* INPUT USING MAP 'XXXXXXXX'
+*     #MENU-SELECTION
+DEFINE DATA PARAMETER
+1 #MENU-SELECTION (A002)
+END-DEFINE
+FORMAT PS=024 LS=080 ZP=OFF SG=OFF KD=OFF IP=OFF
+* MAP2: MAP PROFILES *****************************        200***********
+* .TTAAAMMOO   D I D I N D I D I        ?_)^&:+(                       *
+* 024079        N0NNUCN             X        01 SYSPROF NR             *
+************************************************************************
+INPUT          (     IP=OFF                                           /*
+                                                                       )
+/
+ 002T *USER /*.02S008 A008 .
+      (AD=OD HE='NCDEMAPH' )
+ 025T 'Natural Cruise Planning - Menu'(U)
+ 071T *TIMX /*.01S008 T    .
+      (AD=OD HE='NCDEMAPH' )
+/
+ 001T '_' (079)
+/
+/
+/
+/
+/
+ 016T '1.) Select Cruise by Id'
+/
+/
+ 016T '2.) Read Cruises'
+/
+/
+ 016T '3.) Finish'
+/
+/
+/
+/
+ 016T 'Select Program:'
+ 033T #MENU-SELECTION /*.99U002 A002 .
+      (AD=MDT )
+/
+/
+/
+/
+ 001T '_' (079)
+/
+ 002T 'F1-Help  F2-Select  F3-Stop Program'
+/
+/
+/
+* MAP2: VALIDATION *****************************************************
+* MAP2: END OF MAP *****************************************************
+END

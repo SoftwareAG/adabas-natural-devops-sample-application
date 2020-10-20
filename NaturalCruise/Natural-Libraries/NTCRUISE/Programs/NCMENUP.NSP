@@ -1,0 +1,37 @@
+* >Natural Source Header 000000
+* :Mode S
+* :CP
+* <Natural Source Header
+/** New Program NCMENUP.
+/**
+/** :author ziv
+DEFINE DATA LOCAL
+1 #MENU-SELECTION (A2)
+END-DEFINE
+
+SET KEY ALL
+SET KEY PF1=HELP PF2=ON PF3=ON
+SET CONTROL 'MT'
+
+INPUT USING MAP "NCMENUM"
+
+DECIDE ON FIRST VALUE OF *PF-KEY
+*
+  VALUE 'PF2', 'ENTR'
+    DECIDE ON FIRST VALUE #MENU-SELECTION
+    VALUE '1'
+      STACK TOP COMMAND 'NCMENUP'
+      STACK TOP COMMAND 'NCINMAPP'
+    VALUE '2'
+      STACK TOP COMMAND 'NCMENUP'
+      STACK TOP COMMAND 'NCATENDP'
+    VALUE '3'
+      TERMINATE
+    NONE REINPUT 'Sorry - Selection not available'
+    END-DECIDE
+  VALUE 'PF3'
+    TERMINATE
+  NONE REINPUT 'Sorry - Function key not allocated'
+END-DECIDE
+*
+END
